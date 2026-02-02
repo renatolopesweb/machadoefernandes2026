@@ -56,6 +56,41 @@ function openChatt() {
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
 
+
+
+(function () {
+  var wrap = document.getElementById('chattButtonWrap');
+  if (!wrap) return;
+
+  var THRESHOLD_PX = 4;
+
+  function atBottom() {
+    var viewportPlusScroll = window.innerHeight + window.scrollY;
+    var docHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
+    return viewportPlusScroll >= (docHeight - THRESHOLD_PX);
+  }
+
+  function update() {
+    if (atBottom()) {
+      wrap.classList.add('chatt-content-toggle');
+    } else {
+      wrap.classList.remove('chatt-content-toggle');
+    }
+  }
+
+  window.addEventListener('load', update);
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(update);
+    ro.observe(document.documentElement);
+  }
+})();
+
   
 
 // CURRENT YEAR
