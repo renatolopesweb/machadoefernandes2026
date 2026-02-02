@@ -414,3 +414,6 @@ footer a:hover{
     padding-right: 1rem;
     position: absolute;
 }
+.btn{
+    border-radius: 500px;
+}
